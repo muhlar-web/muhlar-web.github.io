@@ -1,0 +1,137 @@
+{
+    "currentlyReading": [
+      {
+        "author": "Hanya Yanagihara",
+        "title": "A Little Life",
+        "image": "https://m.media-amazon.com/images/I/71If19m2RXL._SL1200_.jpg"
+      }
+    ],
+    "favoriteBooks": [
+      {
+        "author": "George Orwell",
+        "title": "1984",
+        "image": "https://m.media-amazon.com/images/I/71rpa1-kyvL._SL1500_.jpg"
+      },
+      {
+        "author": "Paulo Coelho",
+        "title": "The Alchemist",
+        "image": "https://images-na.ssl-images-amazon.com/images/I/71aFt4+OTOL.jpg"
+      },
+      {
+        "author": "Jane Austen",
+        "title": "Pride and Prejudice",
+        "image": "https://m.media-amazon.com/images/I/81NLDvyAHrL._SL1500_.jpg"
+      },
+      {
+        "author": "J.R.R. Tolkien",
+        "title": "The Lord of the Rings",
+        "image": "https://m.media-amazon.com/images/I/81nV6x2ey4L._SL1500_.jpg"
+      },
+      {
+        "author": "J.R.R. Tolkien",
+        "title": "The Hobbit",
+        "image": "https://m.media-amazon.com/images/I/91ZX8zNpwZL._SL1500_.jpg"
+      },
+      {
+        "author": "Frank Herbert",
+        "title": "Dune",
+        "image": "https://m.media-amazon.com/images/I/71-1WBgjGoL._SL1500_.jpg"
+      },
+      {
+        "author": "Fyodor Dostoevsky",
+        "title": "Crime and Punishment",
+        "image": "https://m.media-amazon.com/images/I/71O2XIytdqL._SL1500_.jpg"
+      },
+      {
+        "author": "Leo Tolstoy",
+        "title": "War and Peace",
+        "image": "https://m.media-amazon.com/images/I/81W6BFaJJWL._SL1500_.jpg"
+      },
+      {
+        "author": "Madeleine Albright",
+        "title": "Madam Secretary: A Memoir",
+        "image": "https://m.media-amazon.com/images/I/81+Vo+ZE7ML._SL1500_.jpg"
+      },
+      {
+        "author": "Barack Obama",
+        "title": "A Promised Land",
+        "image": "https://m.media-amazon.com/images/I/71tiDmszIJL._SL1500_.jpg"
+      },
+      {
+        "author": "Michelle Obama",
+        "title": "Becoming",
+        "image": "https://images-na.ssl-images-amazon.com/images/I/81h2gWPTYJL.jpg"
+      },
+      {
+        "author": "Erich Maria Remarque",
+        "title": "All Quiet on the Western Front",
+        "image": "https://m.media-amazon.com/images/I/81a11CNHs0L._SL1500_.jpg"
+      },
+      {
+        "author": "Yann Martel",
+        "title": "Life of Pi",
+        "image": "https://m.media-amazon.com/images/I/81lBmZWYktL._SL1500_.jpg"
+      },
+      {
+        "author": "Romain Rolland",
+        "title": "Pierre et Luce",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/9/97/Pierre_and_Luce_LibriVox_cover.jpg"
+      },
+      {
+        "author": "Honoré de Balzac",
+        "title": "Father Goriot",
+        "image": "https://m.media-amazon.com/images/I/612yijBAzvL._SL1500_.jpg"
+      },
+      {
+        "author": "Ernest Hemingway",
+        "title": "The Old Man and the Sea",
+        "image": "https://m.media-amazon.com/images/I/614VQ4T3c3L._SL1500_.jpg"
+      },
+      {
+        "author": "Antoine de Saint-Exupéry",
+        "title": "The Little Prince",
+        "image": "https://m.media-amazon.com/images/I/61qzAkjN0dL._SL1500_.jpg"
+      },
+      {
+        "author": "Stephen W. Hawking",
+        "title": "A Brief History of Time: From the Big Bang to Black Holes",
+        "image": "https://m.media-amazon.com/images/I/81J1eDd8CsL._SL1500_.jpg"
+      },
+      {
+        "author": "Walter Isaacson",
+        "title": "Steve Jobs",
+        "image": "https://m.media-amazon.com/images/I/41EQKL0jMhL.jpg"
+      },
+      {
+        "author": "William Styron",
+        "title": "Sophie's Choice",
+        "image": "https://m.media-amazon.com/images/I/713ipQHl9ML._SL1200_.jpg"
+      },
+      {
+        "author": "Isaac Asimov",
+        "title": "I, Robot",
+        "image": "https://upload.wikimedia.org/wikipedia/en/d/d5/I_robot.jpg"
+      },
+      {
+        "author": "J.K. Rowling",
+        "title": "Harry Potter (series)",
+        "image": "https://m.media-amazon.com/images/I/61vwaSitxBL.jpg"
+      },
+      {
+        "author": "Paul Kalanithi",
+        "title": "When Breath Becomes Air",
+        "image": "https://m.media-amazon.com/images/I/71eoWMuIEOL._SL1500_.jpg"
+      },
+      {
+        "author": "Kip Thorne",
+        "title": "The Science of Interstellar",
+        "image": "https://m.media-amazon.com/images/I/51tePNSrghL._SL1200_.jpg"
+      },
+      {
+        "author": " ",
+        "title": "And more....",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png"
+      }
+    ]
+  }
+  
