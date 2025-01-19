@@ -312,10 +312,6 @@
             padding: 10px;
         }
 
-        .book-carousel::-webkit-scrollbar {
-            display: none;
-        }
-
         .book-item {
             flex: 0 0 auto;
             width: 150px;
@@ -503,9 +499,6 @@
             scroll-behavior: smooth;
         }
 
-        .carousel::-webkit-scrollbar {
-            display: none;
-        }
 
         .repo-card {
             flex: 0 0 auto;
