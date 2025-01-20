@@ -304,7 +304,8 @@
             navLinks.classList.toggle('active');
         });
 
-        const username = 'mirouhlar'; 
+        const username = 'mirouhlar';
+        const excludedRepos = ['mirouhlar']; // repository names I want to exclude
 
         async function fetchRepositories() {
             try {
@@ -312,25 +313,27 @@
                 const repos = await response.json();
                 const carousel = document.getElementById('repoCarousel');
 
-                repos.forEach(repo => {
-                    const card = document.createElement('div');
-                    card.className = 'repo-card';
+                repos
+                    .filter(repo => !excludedRepos.includes(repo.name)) // filter out excluded repositories
+                    .forEach(repo => {
+                        const card = document.createElement('div');
+                        card.className = 'repo-card';
 
-                    card.innerHTML = `
-                    <h3>${repo.name}</h3>
-                    <p>Last Updated: ${new Date(repo.updated_at).toLocaleDateString()}</p>
-                    <a href="${repo.html_url}" target="_blank">View on GitHub</a>
+                        card.innerHTML = `
+                <h3>${repo.name}</h3>
+                <p>Last Updated: ${new Date(repo.updated_at).toLocaleDateString()}</p>
+                <a href="${repo.html_url}" target="_blank">View on GitHub</a>
+            `;
+
+                        card.addEventListener('click', () => {
+                            const description = repo.description || 'No description available.';
+                            document.getElementById('repoDescription').innerHTML = `
+                <strong>Short description of ${repo.name} repository:</strong><br>${description}
                 `;
+                        });
 
-                    card.addEventListener('click', () => {
-                        const description = repo.description || 'No description available.';
-                        document.getElementById('repoDescription').innerHTML = `
-                    <strong>Short description of ${repo.name} repository:</strong><br>${description}
-                    `;
+                        carousel.appendChild(card);
                     });
-
-                    carousel.appendChild(card);
-                });
             } catch (error) {
                 console.error('Error fetching repositories:', error);
             }
