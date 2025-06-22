@@ -1,12 +1,17 @@
 {
     "currentlyReading": [
       {
-        "author": "Hanya Yanagihara",
-        "title": "A Little Life",
-        "image": "https://m.media-amazon.com/images/I/71If19m2RXL._SL1200_.jpg"
+        "author": "Suzanne Collins",
+        "title": "The Hunger Games",
+        "image": "https://upload.wikimedia.org/wikipedia/en/3/39/The_Hunger_Games_cover.jpg"
       }
     ],
     "favoriteBooks": [
+      {
+        "author": "Hanya Yanagihara",
+        "title": "A Little Life",
+        "image": "https://m.media-amazon.com/images/I/71If19m2RXL._SL1200_.jpg"
+      },
       {
         "author": "George Orwell",
         "title": "1984",
