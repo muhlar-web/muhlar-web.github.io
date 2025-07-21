@@ -1,0 +1,75 @@
+{
+    "pageTitle": "Test Title",
+    "symbols": [
+        {
+            "symbol": "$a$",
+            "meaning": "Test meaning text."
+        }
+    ],
+    "references": [
+        {
+            "id": "1",
+            "authors": "Teste Author.",
+            "year": "2018",
+            "title": "this is test",
+            "publication": "Test publication",
+            "doi": "doi number 123"
+        }
+    ],
+    "generalContent": [
+        {
+            "type": "title",
+            "text": "Title of general content"
+        },
+        {
+            "type": "paragraph",
+            "text": "This is Paragraph"
+        }
+    ],
+    "flowchartSections": [
+        {
+            "groupTitle": "TEST TITLE OF FLOWCHART",
+            "groupColor": "#3182CE",
+            "items": [
+                {
+                    "id": "flow-assumptions",
+                    "label": "ITEM 1",
+                    "contentSummary": "Summary of content",
+                    "content": [
+                        {
+                            "type": "h2-title",
+                            "text": "Content title"
+                        },
+                        {
+                            "type": "paragraph",
+                            "text": "This is text"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "sections": [
+        {
+            "id": "testeSection",
+            "title": "test Section1",
+            "description": "test description",
+            "content": [
+                {
+                    "type": "paragraph",
+                    "text": "sest context text"
+                },
+                {
+                    "type": "equation",
+                    "description": "Vis-viva Equation",
+                    "latex": "a+b=c"
+                },
+                {
+                    "type": "code",
+                    "language": "cpp",
+                    "code": "#include <iostream>\n#include <string>\nusing namespace std;\n\nvoid myFunction(string fname, int age) {\n    cout << fname << \" Refsnes. \" << age << \" years old. \\n\";\n}\n\nint main() {\n    myFunction(\"Liam\", 3);\n    myFunction(\"Jenny\", 14);\n    myFunction(\"Anja\", 30);\n\n    return 0;\n}\n"
+                }
+            ]
+        }
+    ]
+}
