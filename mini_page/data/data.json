@@ -1,5 +1,5 @@
 {
-    "pageTitle": "Test Title",
+    "pageTitle": "Modeling, Simulation and Control of Nonlinear Underactuated Systems",
     "symbols": [
         {
             "symbol": "$a$",
@@ -19,11 +19,11 @@
     "generalContent": [
         {
             "type": "title",
-            "text": "Title of general content"
+            "text": "Modeling of Underactuated Systems Using the Lagrangian Formulation of Mechanics"
         },
         {
             "type": "paragraph",
-            "text": "This is Paragraph"
+                  "text": "This webpage presents a curated collection of research projects conducted by the author as part of their Diploma Thesis work at the university. The findings are formally documented and organized into dedicated case study sections to ensure clarity and accessibility. Each section outlines the objectives and outcomes of individual studies, offering a structured and transparent overview of the research process. The goal is to provide meaningful insights for peers, collaborators, and anyone with an interest in the subject matter. A central focus of the work is the <strong>Methodology for Modeling and Simulation of Underactuated Dynamic Systems</strong>. One of the most widely adopted and computationally efficient approaches for analytically modeling such systems is the use of <strong>Lagrange’s equations of the second kind</strong>."
         }
     ],
     "flowchartSections": [
