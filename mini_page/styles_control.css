@@ -553,6 +553,10 @@
     .navbar .title {
       font-size: 1.4rem;
     }
+      
+    .dropdown-menu {
+    margin-left: auto;
+    }
   
     .flowchart-container {
       flex-direction: column;
