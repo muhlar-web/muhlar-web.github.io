@@ -9,11 +9,19 @@
     "references": [
         {
             "id": "1",
-            "authors": "Teste Author.",
-            "year": "2018",
-            "title": "this is test",
-            "publication": "Test publication",
+            "authors": "Miroslav Uhľar",
+            "year": "2022",
+            "title": "Application of Advanced Optimization Methods and Algorithms in Nonlinear System Control",
+            "publication": "Diploma Thesis",
             "doi": "doi number 123"
+        },
+        {
+            "id": "2",
+            "authors": "Slávka Jadlovská; Anna Jadlovská; Miroslav Uhľar; Ján Piteľ",
+            "year": "2024",
+            "title": "Modeling and optimal control of underactuated mechanical systems",
+            "publication": "AIP Conf. Proc. 3094, 500036 ",
+            "doi": "10.1063/5.0212921"
         }
     ],
     "generalContent": [
@@ -23,7 +31,7 @@
         },
         {
             "type": "paragraph",
-                  "text": "This webpage presents a curated collection of research projects conducted by the author as part of their Diploma Thesis work at the university. The findings are formally documented and organized into dedicated case study sections to ensure clarity and accessibility. Each section outlines the objectives and outcomes of individual studies, offering a structured and transparent overview of the research process. The goal is to provide meaningful insights for peers, collaborators, and anyone with an interest in the subject matter. A central focus of the work is the <strong>Methodology for Modeling and Simulation of Underactuated Dynamic Systems</strong>. One of the most widely adopted and computationally efficient approaches for analytically modeling such systems is the use of <strong>Lagrange’s equations of the second kind</strong>."
+                  "text": "This webpage features a curated collection of research projects developed by the author, spanning their university studies and continued work after graduation [1][2]. The findings are formally documented and organized into dedicated case study sections to ensure clarity and accessibility. Each section outlines the objectives and outcomes of individual studies, offering a structured and transparent overview of the research process. The goal is to provide meaningful insights for peers, collaborators, and anyone with an interest in the subject matter. A central focus of the work is the <strong>Methodology for Modeling and Simulation of Underactuated Dynamic Systems</strong>. One of the most widely adopted and computationally efficient approaches for analytically modeling such systems is the use of <strong>Lagrange’s equations of the second kind</strong>."
         }
     ],
     "flowchartSections": [
