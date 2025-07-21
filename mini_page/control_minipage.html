@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modeling Control and Simulation Web</title>
+    <link rel="stylesheet" href="styles_control.css" />
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"],
+          ],
+        },
+        svg: { fontCache: "global" },
+      };
+    </script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"
+    ></script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        color: #333;
+        z-index: 1000;
+      }
+      .hidden {
+        display: none !important;
+      }
+
+      #main-content-wrapper.hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading-overlay" class="loading-overlay">Loading content...</div>
+
+    <div id="main-content-wrapper" class="hidden">
+      <nav class="navbar">
+        <div class="container">
+          <div class="navbar-inner">
+            <a href="#" id="page-title-nav" class="title"></a>
+            <div class="dropdown-menu">
+              <details id="navbar-dropdown">
+                <summary class="menu-toggle" style="text-decoration: underline">
+                  Case Studies
+                </summary>
+                <div class="dropdown-content" id="dropdown-links"></div>
+              </details>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div id="general-content-container" class="container mt-4"></div>
+
+      <main id="grid-container" class="container"></main>
+
+      <div id="symbols-container" class="container"></div>
+      <div id="references-container" class="container"></div>
+      <div class="footer">
+        <p>Author: <i>Miroslav Uhľar</i></p>
+      </div>
+      <div id="full-page-overlay">
+        <button
+          id="overlay-close-btn"
+          class="overlay-close-btn"
+          aria-label="Close"
+        >
+          <img
+            alt="X"
+            style="width: 25px; height: 25px; filter: brightness(0) invert(1)"
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy5wMy5vcmcvMjAwMC9zdmciICB2aWV3Qm94PSIwIDAgNTAgNTAiIHdpZHRoPSI1MHB4IiBoZWlnaHQ9IjUwcHgiPjxwYXRoIGQ9TSA5LjE1NjI1IDYuMzEyNSBMIDYuMzEyNSA5LjE1NjI1IEwgMjIuMTU2MjUgMjUgTCA2LjIxODc1IDQwLjkzNzUgTCA5LjAzMTI1IDQzLjc4MTI1IEwgMjUgMjcuODQzNzUgTCA0MC45Mzc1IDQzLjc4MTI1IEwgNDMuNzgxMjUgNDAuOTM3NSBMIDI3Ljg0Mzc1IDI1IEwgNDMuNjg3NSA5LjE1NjI1IEwgNDAuODQzNzUgNi4zMTI1IEwgMjUgMjIuMTU2MjUgWiIvPjwvc3ZnPg=="
+          />
+        </button>
+        <div id="overlay-content" class="overlay-content-wrapper">
+          <div id="overlay-main-content"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-matlab.min.js"></script>
+
+    <script>
+      let jsonDataCache = null;
+
+      let currentActiveFlowchartBox = null;
+      const INITIAL_ITEMS_VISIBLE = 5;
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        const loadingOverlay = document.getElementById("loading-overlay");
+        const mainContentWrapper = document.getElementById(
+          "main-content-wrapper"
+        );
+
+        try {
+          const response = await fetch("data/data.json");
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          jsonDataCache = await response.json();
+
+          loadingOverlay.classList.add("hidden");
+          mainContentWrapper.classList.remove("hidden");
+
+          loadAllContent(jsonDataCache);
+          setupDropdownMenu();
+          setupOverlayControls();
+        } catch (error) {
+          console.error("Failed to load JSON data:", error);
+          loadingOverlay.textContent = `Error loading content: ${error.message}. Please check 'data/data.json'.`;
+          loadingOverlay.style.color = "red";
+        }
+      });
+
+      function renderSymbols(data) {
+        const container = document.getElementById("symbols-container");
+        if (!data || !data.length) {
+          container.style.display = "none";
+          return;
+        }
+
+        container.innerHTML = `<h2 class="title-texth2">Symbols and Abbreviations</h2>`;
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "collapsible-wrapper";
+
+        let tableHTML = `
+              <div class="table-container">
+                  <table>
+                      <thead>
+                          <tr>
+                              <th>Symbol/Abbreviation</th>
+                              <th>Meaning</th>
+                          </tr>
+                      </thead>
+                      <tbody>`;
+        data.forEach((item) => {
+          tableHTML += `
+                  <tr>
+                      <td>${item.symbol}</td>
+                      <td>${item.meaning}</td>
+                  </tr>`;
+        });
+        tableHTML += `</tbody></table></div>`;
+        wrapper.innerHTML = tableHTML;
+        container.appendChild(wrapper);
+
+        if (data.length > INITIAL_ITEMS_VISIBLE) {
+          wrapper.classList.add("collapsed");
+          const showMoreBtn = document.createElement("button");
+          showMoreBtn.className = "show-more-btn";
+          showMoreBtn.textContent = "...";
+          container.appendChild(showMoreBtn);
+
+          showMoreBtn.addEventListener("click", () => {
+            const isCollapsed = wrapper.classList.toggle("collapsed");
+            showMoreBtn.textContent = isCollapsed ? "..." : "Show Less";
+          });
+        }
+
+        if (window.MathJax && MathJax.typesetPromise) {
+          MathJax.typesetPromise([container]);
+        }
+      }
+
+      function renderReferences(data) {
+        const container = document.getElementById("references-container");
+        if (!data || !data.length) {
+          container.style.display = "none";
+          return;
+        }
+
+        container.innerHTML = `<h2 class="title-texth2">References</h2>`;
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "collapsible-wrapper";
+
+        let listHTML = `<ul class="reference-list">`;
+        data.forEach((ref) => {
+          let publication =
+            ref.publication !== "N/A" ? `${ref.publication}.` : "";
+          let details = ref.details ? `${ref.details}.` : "";
+          let link = ref.url
+            ? `<a href="${ref.url}" target="_blank">[link]</a>`
+            : "";
+          listHTML += `<li class="reference-item">[${ref.id}] ${ref.authors} (${ref.year}). <em>${ref.title}</em>. ${publication} ${details} ${link}</li>`;
+        });
+        listHTML += "</ul>";
+        wrapper.innerHTML = listHTML;
+        container.appendChild(wrapper);
+
+        if (data.length > INITIAL_ITEMS_VISIBLE) {
+          wrapper.classList.add("collapsed");
+          const showMoreBtn = document.createElement("button");
+          showMoreBtn.className = "show-more-btn";
+          showMoreBtn.textContent = "...";
+          container.appendChild(showMoreBtn);
+
+          showMoreBtn.addEventListener("click", () => {
+            const isCollapsed = wrapper.classList.toggle("collapsed");
+            showMoreBtn.textContent = isCollapsed ? "..." : "Show Less";
+          });
+        }
+      }
+
+      function renderContent(containerElement, contentItems) {
+        let equationCounter = 0;
+        containerElement.innerHTML = "";
+
+        contentItems.forEach((item) => {
+          let element;
+          switch (item.type) {
+            case "h2-title":
+              element = document.createElement("h2");
+              element.className = "title-texth2";
+              element.textContent = item.text;
+              containerElement.appendChild(element);
+              break;
+            case "title":
+              element = document.createElement("h1");
+              element.className = "title-text";
+              element.textContent = item.text;
+              containerElement.appendChild(element);
+              break;
+            case "paragraph":
+              element = document.createElement("p");
+              element.className = "paragraph-text";
+              element.innerHTML = item.text;
+
+              containerElement.appendChild(element);
+              break;
+            case "image":
+              element = document.createElement("figure");
+              element.className = "section-figure";
+              element.innerHTML = `
+            <img src="${item.src}" alt="${item.caption}"
+                 onerror="this.onerror=null;this.src='https://placehold.co/800x400/334155/e2e8f0?text=Image+Not+Found';">
+            <figcaption>${item.caption}</figcaption>
+          `;
+              containerElement.appendChild(element);
+              break;
+            case "equation":
+              equationCounter++;
+              element = document.createElement("div");
+              element.className = "equation-block";
+              element.innerHTML = `
+            <div class="equation-content-wrapper">
+                <div class="equation-latex">$$${item.latex}$$</div>
+                <div class="equation-number">(${equationCounter})</div>
+            </div>
+          `;
+              containerElement.appendChild(element);
+              break;
+            case "table":
+              let tableHTML = '<div class="table-container"><table>';
+              tableHTML += "<thead><tr>";
+              item.headers.forEach((header) => {
+                tableHTML += `<th>${header}</th>`;
+              });
+              tableHTML += "</tr></thead><tbody>";
+              item.rows.forEach((row) => {
+                tableHTML += "<tr>";
+                row.forEach((cell) => {
+                  tableHTML += `<td>${cell}</td>`;
+                });
+                tableHTML += "</tr>";
+              });
+              tableHTML += "</tbody></table></div>";
+              element = document.createElement("div");
+              element.innerHTML = tableHTML;
+
+              containerElement.appendChild(element.firstElementChild);
+              break;
+            case "code":
+              element = document.createElement("div");
+              element.className = "code-block";
+              element.innerHTML = `
+            <pre><code class="language-${item.language}">${escapeHTML(
+                item.code
+              )}</code></pre>
+          `;
+              containerElement.appendChild(element);
+              break;
+          }
+        });
+
+        if (window.MathJax && MathJax.typesetPromise) {
+          MathJax.typesetPromise([containerElement]);
+        }
+
+        if (window.Prism) {
+          Prism.highlightAllUnder(containerElement);
+        }
+      }
+
+      function escapeHTML(str) {
+        const div = document.createElement("div");
+        div.appendChild(document.createTextNode(str));
+        return div.innerHTML;
+      }
+
+      function loadAllContent(data) {
+        document.title = data.pageTitle;
+        document.getElementById("page-title-nav").textContent = data.pageTitle;
+
+        const generalContentContainer = document.getElementById(
+          "general-content-container"
+        );
+        const gridContainer = document.getElementById("grid-container");
+
+        generalContentContainer.innerHTML = "";
+
+        gridContainer.innerHTML = "";
+
+        if (data.generalContent && data.generalContent.length > 0) {
+          renderContent(generalContentContainer, data.generalContent);
+        }
+
+        if (data.flowchartSections) {
+          const flowchartTitle = document.createElement("h2");
+          flowchartTitle.className = "title-texth2";
+          flowchartTitle.textContent =
+            "Methodology for Modeling and Simulation of Underactuated Dynamic Systems";
+          generalContentContainer.appendChild(flowchartTitle);
+
+          const flowchartDescription = document.createElement("p");
+          flowchartDescription.className = "paragraph-text";
+          flowchartDescription.textContent =
+            "Explore the core steps of methodology. Click on a box to reveal its details on the right.";
+          generalContentContainer.appendChild(flowchartDescription);
+
+          const flowchartContainer = document.createElement("div");
+          flowchartContainer.className = "flowchart-container";
+          flowchartContainer.id = "flowchart-section";
+
+          const leftPanel = document.createElement("div");
+          leftPanel.className = "flowchart-left-panel";
+
+          const rightPanel = document.createElement("div");
+          rightPanel.className =
+            "flowchart-right-panel flowchart-content-panel";
+
+          data.flowchartSections.forEach((group) => {
+            const groupTitle = document.createElement("div");
+            groupTitle.className = "flowchart-group-title";
+            groupTitle.textContent = group.groupTitle;
+            groupTitle.style.borderColor = group.groupColor;
+            leftPanel.appendChild(groupTitle);
+
+            group.items.forEach((item) => {
+              const box = document.createElement("div");
+              box.className = "flowchart-box";
+              box.setAttribute("data-flowchart-item-id", item.id);
+              box.innerHTML = `
+                  <div class="flowchart-box-label">${item.label}</div>
+                  <div class="flowchart-box-content-summary">${item.contentSummary}</div>
+                  `;
+              box.addEventListener("click", () =>
+                handleFlowchartBoxClick(item, box, rightPanel)
+              );
+              leftPanel.appendChild(box);
+            });
+          });
+
+          flowchartContainer.appendChild(leftPanel);
+          flowchartContainer.appendChild(rightPanel);
+          generalContentContainer.appendChild(flowchartContainer);
+        }
+
+        if (data.sections && data.sections.length > 0) {
+          const gridSectionTitle = document.createElement("h2");
+          gridSectionTitle.className = "title-texth2";
+          gridSectionTitle.textContent = "Case Studies";
+          gridContainer.appendChild(gridSectionTitle);
+
+          const gridDescription = document.createElement("p");
+          gridDescription.className = "paragraph-text";
+          gridDescription.textContent =
+            "Explore case studies by clicking the cards below. Each card opens a full-page overlay with comprehensive content.";
+          gridContainer.appendChild(gridDescription);
+
+          data.sections.forEach((section, index) => {
+            const gridItem = document.createElement("div");
+            gridItem.className = "grid-item";
+            gridItem.setAttribute("data-original-section-index", index);
+
+            let isTruncatable =
+              section.description && section.description.length > 86;
+            let truncatedDescription = isTruncatable
+              ? section.description.slice(0, 86).trim() + "..."
+              : section.description;
+
+            gridItem.innerHTML = `
+                  <h2 class="grid-item-title">${section.title}</h2>
+                  ${
+                    section.description
+                      ? `<p class="grid-item-description">${truncatedDescription}</p>`
+                      : ""
+                  }
+                  `;
+            gridItem.addEventListener("click", () => openOverlay(index));
+            gridContainer.appendChild(gridItem);
+          });
+        }
+
+        renderSymbols(data.symbols);
+        renderReferences(data.references);
+      }
+
+      function handleFlowchartBoxClick(item, clickedBox, contentPanel) {
+        if (currentActiveFlowchartBox) {
+          currentActiveFlowchartBox.classList.remove("active");
+        }
+        clickedBox.classList.add("active");
+        currentActiveFlowchartBox = clickedBox;
+        contentPanel.classList.remove("show");
+
+        setTimeout(() => {
+          renderContent(contentPanel, item.content);
+          contentPanel.classList.add("show");
+        }, 150);
+      }
+
+      function openOverlay(index) {
+        const section = jsonDataCache.sections[index];
+        const overlay = document.getElementById("full-page-overlay");
+        const overlayContent = document.getElementById("overlay-content");
+        const overlayMainContent = document.getElementById(
+          "overlay-main-content"
+        );
+        overlayMainContent.innerHTML = "";
+
+        let existingTitle = overlayContent.querySelector(
+          ".overlay-title-large"
+        );
+        if (existingTitle) existingTitle.remove();
+
+        const largeTitleElement = document.createElement("h1");
+        largeTitleElement.className = "overlay-title-large";
+        largeTitleElement.textContent = section.title;
+        overlayContent.prepend(largeTitleElement);
+
+        renderContent(overlayMainContent, section.content);
+
+        document.body.classList.add("overlay-open");
+
+        overlay.classList.add("is-visible");
+      }
+
+      function closeOverlay() {
+        const overlay = document.getElementById("full-page-overlay");
+        document.body.classList.remove("overlay-open");
+        overlay.classList.remove("is-visible");
+      }
+
+      function setupOverlayControls() {
+        document
+          .getElementById("overlay-close-btn")
+          .addEventListener("click", closeOverlay);
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") closeOverlay();
+        });
+      }
+
+      function setupDropdownMenu() {
+        const dropdownLinksContainer =
+          document.getElementById("dropdown-links");
+        dropdownLinksContainer.innerHTML = "";
+
+        if (jsonDataCache.sections && jsonDataCache.sections.length > 0) {
+          jsonDataCache.sections.forEach((section) => {
+            const dropdownLink = `<a href="#${section.id}" class="nav-link">${section.title}</a>`;
+            dropdownLinksContainer.innerHTML += dropdownLink;
+          });
+        }
+
+        const navbarDropdown = document.getElementById("navbar-dropdown");
+        const dropdownSummary = navbarDropdown.querySelector("summary");
+        document.addEventListener("click", (event) => {
+          if (
+            navbarDropdown.hasAttribute("open") &&
+            !navbarDropdown.contains(event.target)
+          ) {
+            dropdownSummary.click();
+          }
+        });
+
+        dropdownLinksContainer.addEventListener("click", (event) => {
+          if (event.target.classList.contains("nav-link")) {
+            event.preventDefault();
+
+            const targetId = event.target.getAttribute("href").substring(1);
+            const targetIndex = jsonDataCache.sections.findIndex(
+              (sec) => sec.id === targetId
+            );
+            if (targetIndex !== -1) {
+              openOverlay(targetIndex);
+
+              if (navbarDropdown.hasAttribute("open")) {
+                dropdownSummary.click();
+              }
+            }
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
