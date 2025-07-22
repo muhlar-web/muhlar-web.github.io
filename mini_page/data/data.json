@@ -63,7 +63,7 @@
                         {
                             "type": "code",
                             "language": "python",
-                            "code": "equations = Lagrange(L, q, D=0, Q=None): \nCompute Lagrange equations of motion using dynamicsymbols. \n\td/dt (∂L/∂q̇_i) - ∂L/∂q_i + ∂D/∂q̇_i = Q_i \n \t Parameters: L : Lagrangian (Ek - Ep) (sympy expression) q : List of generalized coordinates (from dynamicsymbols) D : Dissipative energy (Rayleigh function), optional Q : List of generalized forces, optional Returns: List of symbolic equations of motion "
+                            "code": "from sympy import symbols\nfrom sympy.physics.mechanics import dynamicsymbols\nimport sympy as sp\n\n# Define generalized coordinates\nq = dynamicsymbols('q1 q2 ... qn')\n\n# Define system parameters and time\nt = dynamicsymbols._t\n\n# Define kinetic energy T, potential energy V\nT = ...  # expression involving q, q.diff(t)\nV = ...  # expression involving q\n\n# Define Lagrangian\nL = T - V\n\n# Optionally define Rayleigh dissipation D and generalized forces Q\nD = ...  # e.g., damping term (optional)\nQ = [...]  # list of generalized forces (optional)\n\n# Compute equations of motion\nequations = Lagrange(L, q, D, Q)\n\t# Output: [d/dt(∂L/∂q̇₁) - ∂L/∂q₁ + ∂D/∂q̇₁ - Q₁, ..., d/dt(∂L/∂q̇ₙ) - ∂L/∂qₙ + ∂D/∂q̇ₙ - Qₙ]"
                         }
                     ]
                 }
