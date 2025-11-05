@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Miro Wishlist</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary-color: #166e22;
+        --primary-hover: #1a912a;
+        --card-bg: #1c1c1e;
+        --page-bg: #101010;
+        --text-dark: #f0f0f0;
+        --text-light: #9e9e9e;
+
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.3);
+        --border-radius: 12px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Helvetica, Arial, sans-serif;
+        background-color: var(--page-bg);
+        color: var(--text-dark);
+        line-height: 1.5;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      h1 {
+        font-family: "Poppins", sans-serif;
+        text-align: center;
+        font-weight: 600;
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+        color: var(--text-dark);
+      }
+
+      .wishlist-grid {
+        display: grid;
+        gap: 24px;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
+
+      .wishlist-item {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid #2a2a2a;
+      }
+
+      .wishlist-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .item-image {
+        width: 100%;
+        height: 220px;
+      }
+
+      .item-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .item-content {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+
+      .item-name {
+        font-family: "Poppins", sans-serif;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--text-dark);
+      }
+
+      .item-price {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+      }
+
+      .item-description {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        margin-bottom: 20px;
+        flex-grow: 1;
+      }
+
+      .item-link {
+        display: block;
+        text-decoration: none;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        padding: 12px 15px;
+        border-radius: 8px;
+        font-weight: 500;
+        text-align: center;
+        transition: background-color 0.3s ease;
+      }
+
+      .item-link:hover {
+        background-color: var(--primary-hover);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Miro Wishlist</h1>
+
+      <div id="wishlist-container" class="wishlist-grid"></div>
+    </div>
+
+    <script>
+      const wishlistData = [
+        {
+          id: 1,
+          name: "Limity poznania",
+          description: "Kniha, Autor: Samuel Kováčik",
+          imageUrl: "https://mrtns.sk/tovar/_l/3264/l3264895.jpg?v=17623403222",
+          productUrl: "https://www.martinus.sk/3600333-limity-poznania/kniha",
+        },
+        {
+          id: 2,
+          name: "Ego Death at a Bachelorette Party ",
+          description: "LP - Platňa, Autor: Hayley Williams",
+          imageUrl:
+            "https://www.gramodesky.cz/storage/images/hayley-williams-ego-death-at-a-bachelorette-party-limited-edition-26-highlighter-yellow-vinyl-0.jpg.webp",
+          productUrl:
+            "https://www.gramodesky.cz/album/hayley-williams-ego-death-at-a-bachelorette-party-3954665",
+        },
+        {
+          id: 3,
+          name: "Everybody Scream",
+          description: "LP - Platňa, Autor: Florence And The Machine",
+          imageUrl:
+            "https://www.gramodesky.cz/storage/images/florence-and-the-machine-everybody-scream-0.jpg.webp",
+          productUrl:
+            "https://www.gramodesky.cz/album/florence-and-the-machine-everybody-scream-s-3824233",
+        },
+      ];
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const wishlistContainer = document.getElementById("wishlist-container");
+
+        function displayWishlist(items) {
+          wishlistContainer.innerHTML = "";
+
+          items.forEach((item) => {
+            const itemCard = document.createElement("div");
+            itemCard.className = "wishlist-item";
+
+            itemCard.innerHTML = `
+                        <div class="item-image">
+                            <img src="${item.imageUrl}" alt="${item.name}" style="object-fit: contain; width: 100%; height: 100%;" >
+                        </div>
+                        <div class="item-content">
+                            <h3 class="item-name">${item.name}</h3>
+                            <p class="item-description">${item.description}</p>
+                            <a href="${item.productUrl}" class="item-link" target="_blank" rel="noopener noreferrer">Prejsť na produkt</a>
+                        </div>
+                    `;
+
+            wishlistContainer.appendChild(itemCard);
+          });
+        }
+
+        displayWishlist(wishlistData);
+      });
+    </script>
+  </body>
+</html>
