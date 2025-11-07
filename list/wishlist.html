@@ -167,12 +167,13 @@
       document.addEventListener("DOMContentLoaded", () => {
         const wishlistContainer = document.getElementById("wishlist-container");
 
-        const baseUrl =
+        const gistUrl =
           "https://gist.githubusercontent.com/muhlar-web/abe6f42635de5017ea40fec82fbb4de1/raw/wishlist.json";
 
-        const defaultImageUrl = "no_image.png";
+        const dataUrl =
+          "https://api.allorigins.win/raw?url=" + encodeURIComponent(gistUrl);
 
-        const dataUrl = baseUrl + "?cache-buster=" + new Date().getTime();
+        const defaultImageUrl = "no_image.png";
 
         async function fetchWishlistData() {
           try {
@@ -194,9 +195,7 @@
         function displayWishlist(items) {
           const categorizedItems = items.reduce((acc, item) => {
             const type = [1, 2, 3].includes(item.type) ? item.type : 3;
-            if (!acc[type]) {
-              acc[type] = [];
-            }
+            if (!acc[type]) acc[type] = [];
             acc[type].push(item);
             return acc;
           }, {});
@@ -219,39 +218,37 @@
               const gridItemsHtml = itemsToRender
                 .map((item) => {
                   const finalImageUrl = item.imageUrl || defaultImageUrl;
-
                   const itemPriceHtml = item.price
                     ? `<p class="item-price">${item.price}</p>`
                     : "";
-
                   const productLinkHtml = item.productUrl
                     ? `<a href="${item.productUrl}" class="item-link" target="_blank" rel="noopener noreferrer">Prejsť na produkt</a>`
-                    : ``;
+                    : "";
 
                   return `
-                    <div class="wishlist-item">
-                      <div class="item-image">
-                        <img src="${finalImageUrl}" alt="${item.name}" style="object-fit: contain; width: 100%; height: 100%;" >
-                      </div>
-                      <div class="item-content">
-                        <h3 class="item-name">${item.name}</h3>
-                        ${itemPriceHtml}
-                        <p class="item-description">${item.description}</p>
-                        ${productLinkHtml}
-                      </div>
-                    </div>
-                  `;
+                <div class="wishlist-item">
+                  <div class="item-image">
+                    <img src="${finalImageUrl}" alt="${item.name}" style="object-fit: contain; width: 100%; height: 100%;">
+                  </div>
+                  <div class="item-content">
+                    <h3 class="item-name">${item.name}</h3>
+                    ${itemPriceHtml}
+                    <p class="item-description">${item.description}</p>
+                    ${productLinkHtml}
+                  </div>
+                </div>
+              `;
                 })
                 .join("");
 
               fullHtml += `
-                <section class="category-section" id="category-${typeId}">
-                  <h2 class="category-title">${categoryTitle}</h2>
-                  <div class="wishlist-grid">
-                    ${gridItemsHtml}
-                  </div>
-                </section>
-              `;
+            <section class="category-section" id="category-${typeId}">
+              <h2 class="category-title">${categoryTitle}</h2>
+              <div class="wishlist-grid">
+                ${gridItemsHtml}
+              </div>
+            </section>
+          `;
             }
           });
 
