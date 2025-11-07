@@ -143,54 +143,27 @@
     </div>
 
     <script>
-      const wishlistData = [
-        {
-          id: 1,
-          name: "Limity poznania",
-          description: "Kniha, Autor: Samuel Kováčik",
-          imageUrl: "https://mrtns.sk/tovar/_l/3264/l3264895.jpg?v=17623403222",
-          productUrl: "https://www.martinus.sk/3600333-limity-poznania/kniha",
-        },
-        {
-          id: 2,
-          name: "Ego Death at a Bachelorette Party ",
-          description: "LP - Platňa, Autor: Hayley Williams",
-          imageUrl:
-            "https://www.gramodesky.cz/storage/images/hayley-williams-ego-death-at-a-bachelorette-party-limited-edition-26-highlighter-yellow-vinyl-0.jpg.webp",
-          productUrl:
-            "https://www.gramodesky.cz/album/hayley-williams-ego-death-at-a-bachelorette-party-3954665",
-        },
-        {
-          id: 3,
-          name: "Everybody Scream",
-          description: "LP - Platňa, Autor: Florence And The Machine",
-          imageUrl:
-            "https://www.gramodesky.cz/storage/images/florence-and-the-machine-everybody-scream-0.jpg.webp",
-          productUrl:
-            "https://www.gramodesky.cz/album/florence-and-the-machine-everybody-scream-s-3824233",
-        },
-        {
-          id: 4,
-          name: "A Night At The Opera",
-          description: "LP - Platňa, Autor: Queen",
-          imageUrl:
-            "https://www.gramodesky.cz/storage/images/queen-a-night-at-the-opera-ltd-0.jpg.webp",
-          productUrl:
-            "https://www.gramodesky.cz/album/queen-a-night-at-the-opera-1975-18564",
-        },
-        {
-          id: 5,
-          name: "Currents",
-          description: "LP - Platňa, Autor: Tame Impala",
-          imageUrl:
-            "https://www.gramodesky.cz/storage/images/tame-impala-currents-2015-6260-0.jpg.webp",
-          productUrl:
-            "https://www.gramodesky.cz/album/tame-impala-currents-2015-6260",
-        },
-      ];
-
       document.addEventListener("DOMContentLoaded", () => {
         const wishlistContainer = document.getElementById("wishlist-container");
+
+        const dataUrl =
+          "https://gist.githubusercontent.com/muhlar-web/abe6f42635de5017ea40fec82fbb4de1/raw/f514fe8609cb3b8b2a2f7173e7ed4242e4b9fc68/wishlist.json";
+        async function fetchWishlistData() {
+          try {
+            const response = await fetch(dataUrl);
+
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const items = await response.json();
+            displayWishlist(items);
+          } catch (error) {
+            console.error("Error fetching wishlist data:", error);
+            wishlistContainer.innerHTML =
+              "<p style='color: var(--text-light);'>Could not load wishlist items.</p>";
+          }
+        }
 
         function displayWishlist(items) {
           wishlistContainer.innerHTML = "";
@@ -200,21 +173,21 @@
             itemCard.className = "wishlist-item";
 
             itemCard.innerHTML = `
-                        <div class="item-image">
-                            <img src="${item.imageUrl}" alt="${item.name}" style="object-fit: contain; width: 100%; height: 100%;" >
-                        </div>
-                        <div class="item-content">
-                            <h3 class="item-name">${item.name}</h3>
-                            <p class="item-description">${item.description}</p>
-                            <a href="${item.productUrl}" class="item-link" target="_blank" rel="noopener noreferrer">Prejsť na produkt</a>
-                        </div>
-                    `;
+              <div class="item-image">
+                <img src="${item.imageUrl}" alt="${item.name}" style="object-fit: contain; width: 100%; height: 100%;" >
+              </div>
+              <div class="item-content">
+                <h3 class="item-name">${item.name}</h3>
+                <p class="item-description">${item.description}</p>
+                <a href="${item.productUrl}" class="item-link" target="_blank" rel="noopener noreferrer">Prejsť na produkt</a>
+              </div>
+            `;
 
             wishlistContainer.appendChild(itemCard);
           });
         }
 
-        displayWishlist(wishlistData);
+        fetchWishlistData();
       });
     </script>
   </body>
