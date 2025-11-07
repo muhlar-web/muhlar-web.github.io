@@ -55,6 +55,27 @@
         color: var(--text-dark);
       }
 
+      .category-section {
+        margin-bottom: 50px;
+        padding-top: 20px;
+        border-top: 1px solid #2a2a2a;
+      }
+
+      .category-title {
+        font-family: "Poppins", sans-serif;
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 25px;
+        color: var(--primary-color);
+        text-align: left;
+      }
+
+      .no-items {
+        color: var(--text-light);
+        padding: 10px 0;
+        font-style: italic;
+      }
+
       .wishlist-grid {
         display: grid;
         gap: 24px;
@@ -139,10 +160,10 @@
     <div class="container">
       <h1>Miro Wishlist</h1>
 
-      <div id="wishlist-container" class="wishlist-grid"></div>
+      <div id="wishlist-container"></div>
     </div>
 
-        <script>
+    <script>
       document.addEventListener("DOMContentLoaded", () => {
         const wishlistContainer = document.getElementById("wishlist-container");
 
@@ -171,31 +192,75 @@
         }
 
         function displayWishlist(items) {
-          wishlistContainer.innerHTML = "";
+          const categorizedItems = items.reduce((acc, item) => {
+            const type = [1, 2, 3].includes(item.type) ? item.type : 3;
+            if (!acc[type]) {
+              acc[type] = [];
+            }
+            acc[type].push(item);
+            return acc;
+          }, {});
 
-          items.forEach((item) => {
-            const finalImageUrl = item.imageUrl || defaultImageUrl;
+          const categoriesMap = {
+            1: "Knihy",
+            2: "Hudba",
+            3: "Ostatné",
+          };
 
-            const productLinkHtml = item.productUrl
-              ? `<a href="${item.productUrl}" class="item-link" target="_blank" rel="noopener noreferrer">Prejsť na produkt</a>`
-              : ``;
+          let fullHtml = "";
+          let itemsRendered = false;
 
-            const itemCard = document.createElement("div");
-            itemCard.className = "wishlist-item";
+          [1, 2, 3].forEach((typeId) => {
+            const categoryTitle = categoriesMap[typeId];
+            const itemsToRender = categorizedItems[typeId] || [];
 
-            itemCard.innerHTML = `
-          <div class="item-image">
-            <img src="${finalImageUrl}" alt="${item.name}" style="object-fit: contain; width: 100%; height: 100%;" >
-          </div>
-          <div class="item-content">
-            <h3 class="item-name">${item.name}</h3>
-            <p class="item-description">${item.description}</p>
-            ${productLinkHtml}
-          </div>
-        `;
+            if (itemsToRender.length > 0) {
+              itemsRendered = true;
+              const gridItemsHtml = itemsToRender
+                .map((item) => {
+                  const finalImageUrl = item.imageUrl || defaultImageUrl;
 
-            wishlistContainer.appendChild(itemCard);
+                  const itemPriceHtml = item.price
+                    ? `<p class="item-price">${item.price}</p>`
+                    : "";
+
+                  const productLinkHtml = item.productUrl
+                    ? `<a href="${item.productUrl}" class="item-link" target="_blank" rel="noopener noreferrer">Prejsť na produkt</a>`
+                    : ``;
+
+                  return `
+                    <div class="wishlist-item">
+                      <div class="item-image">
+                        <img src="${finalImageUrl}" alt="${item.name}" style="object-fit: contain; width: 100%; height: 100%;" >
+                      </div>
+                      <div class="item-content">
+                        <h3 class="item-name">${item.name}</h3>
+                        ${itemPriceHtml}
+                        <p class="item-description">${item.description}</p>
+                        ${productLinkHtml}
+                      </div>
+                    </div>
+                  `;
+                })
+                .join("");
+
+              fullHtml += `
+                <section class="category-section" id="category-${typeId}">
+                  <h2 class="category-title">${categoryTitle}</h2>
+                  <div class="wishlist-grid">
+                    ${gridItemsHtml}
+                  </div>
+                </section>
+              `;
+            }
           });
+
+          if (!itemsRendered) {
+            wishlistContainer.innerHTML =
+              "<p class='no-items'>V zozname želaní momentálne nie sú žiadne položky.</p>";
+          } else {
+            wishlistContainer.innerHTML = fullHtml;
+          }
         }
 
         fetchWishlistData();
