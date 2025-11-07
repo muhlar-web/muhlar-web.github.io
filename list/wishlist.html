@@ -142,12 +142,17 @@
       <div id="wishlist-container" class="wishlist-grid"></div>
     </div>
 
-    <script>
+        <script>
       document.addEventListener("DOMContentLoaded", () => {
         const wishlistContainer = document.getElementById("wishlist-container");
 
-        const dataUrl =
+        const baseUrl =
           "https://gist.githubusercontent.com/muhlar-web/abe6f42635de5017ea40fec82fbb4de1/raw/wishlist.json";
+
+        const defaultImageUrl = "no_image.png";
+
+        const dataUrl = baseUrl + "?cache-buster=" + new Date().getTime();
+
         async function fetchWishlistData() {
           try {
             const response = await fetch(dataUrl);
@@ -161,7 +166,7 @@
           } catch (error) {
             console.error("Error fetching wishlist data:", error);
             wishlistContainer.innerHTML =
-              "<p style='color: var(--text-light);'>Could not load wishlist items.</p>";
+              "<p style='color: var(--text-light);'>Could not load wishlist items. Check the network connection or Gist URL.</p>";
           }
         }
 
@@ -169,19 +174,25 @@
           wishlistContainer.innerHTML = "";
 
           items.forEach((item) => {
+            const finalImageUrl = item.imageUrl || defaultImageUrl;
+
+            const productLinkHtml = item.productUrl
+              ? `<a href="${item.productUrl}" class="item-link" target="_blank" rel="noopener noreferrer">Prejsť na produkt</a>`
+              : ``;
+
             const itemCard = document.createElement("div");
             itemCard.className = "wishlist-item";
 
             itemCard.innerHTML = `
-              <div class="item-image">
-                <img src="${item.imageUrl}" alt="${item.name}" style="object-fit: contain; width: 100%; height: 100%;" >
-              </div>
-              <div class="item-content">
-                <h3 class="item-name">${item.name}</h3>
-                <p class="item-description">${item.description}</p>
-                <a href="${item.productUrl}" class="item-link" target="_blank" rel="noopener noreferrer">Prejsť na produkt</a>
-              </div>
-            `;
+          <div class="item-image">
+            <img src="${finalImageUrl}" alt="${item.name}" style="object-fit: contain; width: 100%; height: 100%;" >
+          </div>
+          <div class="item-content">
+            <h3 class="item-name">${item.name}</h3>
+            <p class="item-description">${item.description}</p>
+            ${productLinkHtml}
+          </div>
+        `;
 
             wishlistContainer.appendChild(itemCard);
           });
