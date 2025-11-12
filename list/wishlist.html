@@ -158,113 +158,115 @@
   </head>
   <body>
     <div class="container">
-      <h1>Miro Wishlist</h1>
+      <h1>Wishlist</h1>
 
       <div id="wishlist-container"></div>
     </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const wishlistContainer = document.getElementById("wishlist-container");
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const wishlistContainer = document.getElementById("wishlist-container");
 
-        const baseUrl =
-          "https://gist.githubusercontent.com/muhlar-web/abe6f42635de5017ea40fec82fbb4de1/raw/wishlist.json";
+    const baseUrl =
+      "https://gist.githubusercontent.com/muhlar-web/abe6f42635de5017ea40fec82fbb4de1/raw/wishlist.json";
 
-        const defaultImageUrl = "no_image.png";
+    const defaultImageUrl = "no_image.png";
 
-        const dataUrl = baseUrl + "?cache-buster=" + new Date().getTime();
+    const dataUrl = baseUrl + "?cache-buster=" + new Date().getTime();
 
-        async function fetchWishlistData() {
-          try {
-            const response = await fetch(dataUrl);
+    async function fetchWishlistData() {
+      try {
+        const response = await fetch(dataUrl);
 
-            if (!response.ok) {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            const items = await response.json();
-            displayWishlist(items);
-          } catch (error) {
-            console.error("Error fetching wishlist data:", error);
-            wishlistContainer.innerHTML =
-              "<p style='color: var(--text-light);'>Could not load wishlist items. Check the network connection or Gist URL.</p>";
-          }
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        function displayWishlist(items) {
-          const categorizedItems = items.reduce((acc, item) => {
-            const type = [1, 2, 3].includes(item.type) ? item.type : 3;
-            if (!acc[type]) {
-              acc[type] = [];
-            }
-            acc[type].push(item);
-            return acc;
-          }, {});
+        const items = await response.json();
+        displayWishlist(items);
+      } catch (error) {
+        console.error("Error fetching wishlist data:", error);
+        wishlistContainer.innerHTML =
+          "<p style='color: var(--text-light);'>Could not load wishlist items. Check the network connection or Gist URL.</p>";
+      }
+    }
 
-          const categoriesMap = {
-            1: "Knihy",
-            2: "Hudba",
-            3: "Ostatné",
-          };
+    function displayWishlist(items) {
+      const categorizedItems = items.reduce((acc, item) => {
+        const type = [1, 2, 3].includes(item.type) ? item.type : 3;
+        if (!acc[type]) {
+          acc[type] = [];
+        }
+        acc[type].push(item);
+        return acc;
+      }, {});
 
-          let fullHtml = "";
-          let itemsRendered = false;
+      const categoriesMap = {
+        1: "Knihy",
+        2: "Hudba",
+        3: "Ostatné",
+      };
 
-          [1, 2, 3].forEach((typeId) => {
-            const categoryTitle = categoriesMap[typeId];
-            const itemsToRender = categorizedItems[typeId] || [];
+      let fullHtml = "";
+      let itemsRendered = false;
 
-            if (itemsToRender.length > 0) {
-              itemsRendered = true;
-              const gridItemsHtml = itemsToRender
-                .map((item) => {
-                  const finalImageUrl = item.imageUrl || defaultImageUrl;
+      [1, 2, 3].forEach((typeId) => {
+        const categoryTitle = categoriesMap[typeId];
+        const itemsToRender = categorizedItems[typeId] || [];
 
-                  const itemPriceHtml = item.price
-                    ? `<p class="item-price">${item.price}</p>`
-                    : "";
+        if (itemsToRender.length > 0) {
+          itemsRendered = true;
+          const gridItemsHtml = itemsToRender
+            .sort((a, b) => a.name.localeCompare(b.name))
+  
+            .map((item) => {
+              const finalImageUrl = item.imageUrl || defaultImageUrl;
 
-                  const productLinkHtml = item.productUrl
-                    ? `<a href="${item.productUrl}" class="item-link" target="_blank" rel="noopener noreferrer">Prejsť na produkt</a>`
-                    : ``;
+              const itemPriceHtml = item.price
+                ? `<p class="item-price">${item.price}</p>`
+                : "";
 
-                  return `
-                    <div class="wishlist-item">
-                      <div class="item-image">
-                        <img src="${finalImageUrl}" alt="${item.name}" style="object-fit: contain; width: 100%; height: 100%;" >
-                      </div>
-                      <div class="item-content">
-                        <h3 class="item-name">${item.name}</h3>
-                        ${itemPriceHtml}
-                        <p class="item-description">${item.description}</p>
-                        ${productLinkHtml}
-                      </div>
-                    </div>
-                  `;
-                })
-                .join("");
+              const productLinkHtml = item.productUrl
+                ? `<a href="${item.productUrl}" class="item-link" target="_blank" rel="noopener noreferrer">Prejsť na produkt</a>`
+                : ``;
 
-              fullHtml += `
-                <section class="category-section" id="category-${typeId}">
-                  <h2 class="category-title">${categoryTitle}</h2>
-                  <div class="wishlist-grid">
-                    ${gridItemsHtml}
+              return `
+                <div class="wishlist-item">
+                  <div class="item-image">
+                    <img src="${finalImageUrl}" alt="${item.name}" style="object-fit: contain; width: 100%; height: 100%;" >
                   </div>
-                </section>
+                  <div class="item-content">
+                    <h3 class="item-name">${item.name}</h3>
+                    ${itemPriceHtml}
+                    <p class="item-description">${item.description}</p>
+                    ${productLinkHtml}
+                  </div>
+                </div>
               `;
-            }
-          });
+            })
+            .join("");
 
-          if (!itemsRendered) {
-            wishlistContainer.innerHTML =
-              "<p class='no-items'>V zozname želaní momentálne nie sú žiadne položky.</p>";
-          } else {
-            wishlistContainer.innerHTML = fullHtml;
-          }
+          fullHtml += `
+            <section class="category-section" id="category-${typeId}">
+              <h2 class="category-title">${categoryTitle}</h2>
+              <div class="wishlist-grid">
+                ${gridItemsHtml}
+              </div>
+            </section>
+          `;
         }
-
-        fetchWishlistData();
       });
-    </script>
+
+      if (!itemsRendered) {
+        wishlistContainer.innerHTML =
+          "<p class='no-items'>V zozname želaní momentálne nie sú žiadne položky.</p>";
+      } else {
+        wishlistContainer.innerHTML = fullHtml;
+      }
+    }
+
+    fetchWishlistData();
+  });
+</script>
   </body>
 </html>
