@@ -1,327 +1,233 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miroslav Uhľar</title>
-    <link rel="stylesheet" href="styles.css">
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Miroslav Uhľar - Software Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Oswald:wght@200..700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;600&family=Inter:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">DEV.MIRO</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Stack & Projects</a></li>
+        <li><a href="#certificates">Certificates & Courses</a></li>
+      </ul>
+      <button id="theme-toggle" aria-label="Toggle Dark Mode">
+        <i class="fas fa-moon"></i>
+      </button>
+    </nav>
 
-
-</head>
-
-<body>
-    <!-- Left Panel -->
-    <div class="left-panel">
-        <!-- <img src="avatar.webp" alt="Profile Picture"> -->
-        <br>
-        <h3>Miroslav Uhľar</h3>
-        <hr width="80%" size="1px" color="black">
-        <div class="info">
-            <p>
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <a href="mailto:uhlar.miro@gmail.com"> &nbsp;uhlar.miro@gmail.com</a>
-            </p>
-            <p>
-                <i class="fa fa-home" aria-hidden="true" style="font-size:26px"></i> Košice, Slovakia
-            </p>
-
-            <div class="social-links">
-                <br>
-                <p>Connect with me:</p>
-                <a href="https://www.linkedin.com/in/miroslavuhlar/" target="_blank" aria-label="LinkedIn">
-                    <i class="fa fa-linkedin-square" style="font-size:30px" aria-hidden="true"></i>
-                </a>
-                <a href="https://github.com/mirouhlar" target="_blank" aria-label="GitHub">
-                    <i class="fa fa-github" style="font-size:30px" aria-hidden="true"></i>
-                </a>
-                <a href="" target="_blank" aria-label="Twitter">
-                    <i class="fa fa-twitter" style="font-size:30px" aria-hidden="true"></i>
-                </a>
-                <a href="" target="_blank" aria-label="Facebook">
-                    <i class="fa fa-facebook-square" style="font-size:30px" aria-hidden="true"></i>
-                </a>
-            </div>
+    <section id="home" class="hero">
+      <canvas id="hero-canvas"></canvas>
+      <div class="hero-content">
+        <h1>
+          Software Developer <br />
+          & Data Enthusiast
+        </h1>
+        <p>
+          Developing efficient, high-performance solutions with clean,
+          maintainable code, while constantly learning and embracing new
+          technologies to solve complex problems.
+        </p>
+        <div class="hero-btns">
+          <a
+            href="mailto:uhlar.miro@gmail.com"
+            target="_blank"
+            class="btn btn-outline"
+          >
+            <i class="fab fa-google"></i> Gmail
+          </a>
+          <a
+            href="https://github.com/mirouhlar"
+            target="_blank"
+            class="btn btn-outline"
+            ><i class="fab fa-github"></i> GitHub</a
+          >
+          <a
+            href="https://linkedin.com/in/miroslavuhlar"
+            target="_blank"
+            class="btn btn-outline"
+            ><i class="fab fa-linkedin"></i> LinkedIn</a
+          >
+          <a href="#" target="_blank" class="btn btn-outline"
+            ><i class="fab fa-kaggle"></i> Kaggle</a
+          >
         </div>
-    </div>
+      </div>
+    </section>
 
+    <section id="about" class="section">
+      <div class="container">
+        <h2>About Me & Experience</h2>
 
+        <div class="about-text">
+          <p></p>
 
-    <div class="content_total">
-        <!-- Navigation Bar -->
-        <nav class="navbar">
-            <div class="nav-container">
-                <!-- <a href="#" class="logo">Logo</a> -->
-                <p> </p>
-                <button class="menu-toggle">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
-                <ul class="nav-links">
-                    <li><a href="#about">About</a></li>
-                    <li class="sl">/</li>
-                    <li><a href="#resume">Resume</a></li>
-                    <li class="sl">/</li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li class="sl">/</li>
-                    <li><a href="#books">Books</a></li>
-                    <li class="sl">/</li>
-                    <li><a href="#music">Music</a></li>
-                </ul>
-            </div>
-        </nav>
+          <p>
+            I'm a <strong>detail-oriented problem solver</strong> with a growing
+            passion for <strong>data science</strong>,
+            <strong>data engineering</strong>, and <strong>robotics</strong>. My
+            background in <strong>Intelligent Systems</strong> sparked my
+            interest in <strong>machine learning</strong> and
+            <strong>AI</strong>, and I’m particularly fascinated by the ways
+            these fields intersect with <strong>robotics</strong> to drive
+            <strong>automation</strong> and <strong>innovation</strong>.
+          </p>
 
-
-        <div class="text_content">
-            <!-- Sections with content -->
-            <div class="small-screen-only">
-                <h3>Miroslav Uhľar</h3>
-                <div class="social-links">
-                    <br>
-                    <p>Connect with me:</p>
-                    <a href="https://www.linkedin.com/in/miroslavuhlar/" target="_blank" aria-label="LinkedIn">
-                        <i class="fa fa-linkedin-square" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://github.com/mirouhlar" target="_blank" aria-label="GitHub">
-                        <i class="fa fa-github" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://twitter.com/yourprofile" target="_blank" aria-label="Twitter">
-                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://facebook.com/yourprofile" target="_blank" aria-label="Facebook">
-                        <i class="fa fa-facebook-square" aria-hidden="true"></i>
-                    </a>
-                </div>
-            </div>
-            <section class="content animated">
-                <h2 class="line-before" id="about">About me</h2>
-<p>Hi, I'm Miro! I'm a <strong>detail-oriented problem solver</strong> with a growing passion for <strong>data science, data engineering, and robotics</strong>. My background in Intelligent Systems ignited my interest in machine learning and AI, and I'm particularly fascinated by how these fields intersect with <strong>robotics to drive automation and innovation</strong>.</p>
-
-<p>I've gained hands-on experience developing practical solutions as an independent developer, sharpening my skills and fueling my enthusiasm. I thrive on solving tricky problems and seeing the results come to life, constantly seeking to learn and grow alongside experienced professionals. You can find my personal projects on GitHub, showcasing my ongoing work.</p>
-
-<p>My time in the USA during university was a highlight, offering an incredible <strong>cultural experience</strong> that broadened my perspective and reinforced my motto: "Where there's a will, there's a way."</p>
-
-<p>When I'm not immersed in technology, you'll find me running, playing guitar, reading, hunting for vinyl, or tackling DIY projects. These hobbies keep my curiosity alive and me energized.</p>
-                <p>
-                    Feel free to connect with me on <a href="https://www.linkedin.com/in/miroslavuhlar/" target="_blank"
-                        style="text-decoration: none;color: #db0808;">LinkedIn</a> or
-                    drop me an
-                    <a href="mailto:uhlar.miro@gmail.com" style="text-decoration: none; color: #db0808;">email</a>—I’d
-                    love to chat about opportunities, ideas, or
-                    even swap book
-                    recommendations!
-                </p>
-            </section>
-
-            <section class="content2 animated" id="id2">
-                <h2 class="line-after" id="resume">My resume</h2>
-                <div class="resume-content">
-                    <div class="resume-box">
-                        <h3>Education</h3>
-                        <ul>
-                            <li><strong>Master's in Computer Science - Intelligent Systems</strong> - Technical
-                                University of Košice</li> <em>Graduated with Honors</em>
-                            <li><strong>Bachelor's in Computer Science - Intelligent Systems</strong> - Technical
-                                University of Košice</li> <em>Graduated with Honors • Dean's honorable mention</em>
-                        </ul>
-                    </div>
-                    <div class="resume-box">
-                        <h3>Work Experience</h3>
-                        <ul>
-                            <li><strong>Programmer</strong> at Amit Transportation | <em> Prague CZ</em> (2024 - 2024)
-                            </li>
-                            <li><strong>Software Engineer</strong> at Siemens | <em> Prague CZ</em> (2023 - 2024)</li>
-                            <li><strong>IT Assistant</strong> at Deutsche Telekom IT Solutions Slovakia | <em> Košice
-                                    SK</em>· Part-time (2021 - 2022) </li>
-                        </ul>
-                    </div>
-                    <div class="resume-box">
-                        <h3>Courses and Certifications</h3>
-                        <ul>
-                            <li><strong>MySQL for Data Analytics</strong> - 365 Careers</li>
-                            <li><strong>Data Engineering</strong> - AWS, DeepLearning.AI</li>
-                            <li><strong>Python for Data Science</strong> - Udemy</li>
-                            <li><strong>Statistics for Data Science</strong> - 365 Careers</li>
-                            <li><strong>Unreal Development in C++</strong> - Coursera</li>
-                            <li><strong>Machine Learning</strong> - DeepLearning.AI, Stanford University</li>
-                            <li><strong>Competence in electrical engineering., §4 </strong> - Siemens</li>
-                            <li><strong>Google UX Design</strong> - Google</li>
-                        </ul>
-
-                    </div>
-                    <div class="resume-box">
-                        <h3>Skills</h3>
-                        <ul>
-                            <li><strong>Programming:</strong> Python, C++, C, SQL, JavaScript</li>
-                            <li><strong>Databases:</strong> MySQL, MongoDB </li>
-                            <li><strong>Version Control:</strong> Git, GitHub</li>
-                            <li><strong>Data Processing & Analysis:</strong> Pandas, NumPy, Matplotlib, Seaborn</li>
-                            <li><strong>Machine Learning:</strong> scikit-learn, TensorFlow</li>
-                            <li><strong>Mathematical Modeling & Symbolic Computation:</strong> MATLAB (Control System
-                                Toolbox, Simulink, Symbolic Math Toolbox, Optimization Toolbox, Signal Processing
-                                Toolbox), SymPy, Control Theory, Linear and Nonlinear System Modeling</li>
-                            <li><strong>Control Engineering:</strong> State-Space Analysis, Stability Analysis, Robust
-                                Control, Adaptive Control, Predictive Control</li>
-                        </ul>
-                    </div>
-                    <div class="resume-box">
-                        <h3>Research and Publications</h3>
-                        <ul>
-                            <li><strong>Modeling and optimal control of underactuated mechanical systems</strong> AIP Conf. Proc. 3094, 500036 (2024) <a href="
-                                https://doi.org/10.1063/5.0212921
-                                " target="_blank" rel="noopener noreferrer">DOI 10.1063/5.0212921                            </a></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-
-
-
-            <section class="content animated" id="projects">
-                <h2 class="line-after">My GitHub Repositories</h2>
-                <div class="carousel" id="repoCarousel"></div>
-                <div class="repo-description" id="repoDescription"><strong>Click on a repository to see its description
-                        here.</strong></div>
-
-            </section>
-
-            <section class="content2 animated" id="books">
-                <div class="section">
-                    <h2 class="line-before">In My Library</h2>
-                    <p> Books have always been a source of inspiration, learning, and personal growth for me. The ones
-                        I’ve listed here are books I believe everyone should read at least once in their lifetime. Each
-                        of these books has shaped my thinking, sparked my creativity, or simply brought joy to my life.
-                        More importantly, they’ve offered me the invaluable opportunity to see the world through
-                        perspectives different from my own, broadening my understanding and deepening my empathy. As an
-                        avid reader, I continually explore new books and will update this list whenever I find something
-                        I believe truly belongs here. I hope these books inspire you as much as they have inspired me.
-                    </p>
-                    </div>
-            </section>
-            <section class="content2 animated" style="padding-top: 0;">
-                <div class="book-carousel" id="favoriteBooks"></div>
-            </section>
-            <section class="content animated" id="music">
-                <div lass="spotify-section">
-                    <h2 class="line-after">From My Turntable</h2>
-                    <p>Music has a way of speaking to the soul, transcending words, and connecting us to emotions and
-                        experiences we might not even know we had. The tracks and albums I’ve listed here are not just
-                        songs I enjoy—they’re pieces of art that I believe have the power to move, inspire, and broaden
-                        perspectives. From melodies that evoke nostalgia to rhythms that energize, each selection holds
-                        something unique and meaningful. Music is a journey, and I’m always discovering new sounds that
-                        resonate deeply. This list will grow and evolve as I find more music that I feel deserves to be
-                        shared. I hope these songs bring as much joy and inspiration to you as they have to me.</p>
-                </div>
-
-            </section>
-            <section class="content2 animated" style="padding-top: 0;">
-                <iframe style="border-radius:12px"
-                        src="https://open.spotify.com/embed/playlist/0ZuHDqjGdv0Otvp9amE4AD?utm_source=generator"
-                        width="100%" height="500" frameBorder="0" allowfullscreen=""
-                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                        loading="lazy"></iframe>
-            </section>
-
+          <p>
+            Through hands-on experience, I’ve built
+            <strong>practical solutions</strong> that have sharpened my skills
+            and fueled my enthusiasm. I thrive on tackling
+            <strong>complex challenges</strong> and bringing
+            <strong>cutting-edge solutions</strong> to life, constantly seeking
+            opportunities to <strong>learn</strong> and
+            <strong>grow</strong> alongside experienced professionals.
+          </p>
         </div>
-        <footer class="footer">
-            <p>Designed and developed by Miroslav Uhľar </p>
-        </footer>
-    </div>
 
-    <script>
-        // Fetching book data from the JSON file
-        fetch('data/booksData.json')
-            .then(response => response.json())
-            .then(data => {
-                function populateBooks(sectionId, books, isCurrentlyReading = false) {
-                    const section = document.getElementById(sectionId);
-                    books.forEach(book => {
-                        const bookElement = document.createElement('div');
-                        bookElement.className = `book-item ${isCurrentlyReading ? 'currently-reading-border' : ''}`;
-                        bookElement.innerHTML = `
-                            <img src="${book.image}" alt="${book.title}">
-                            <div class="book-title">${book.title}</div>
-                            <div class="book-author">${book.author}</div>
-                            ${isCurrentlyReading ? '<div class="currently-reading-label">Currently Reading</div>' : ''}
-                        `;
-                        section.appendChild(bookElement);
-                    });
-                }
-    
-                populateBooks('favoriteBooks', data.currentlyReading, true);
-                populateBooks('favoriteBooks', data.favoriteBooks);
-            })
-            .catch(error => console.error('Error loading books data:', error));
-    </script>
-    
+        <div class="resume-content">
+          <div class="resume-box">
+            <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+            <ul>
+              <li>
+                <b>Bachelor's in Computer Science</b><br />
+                <em>Intelligent Systems</em>
+                <span style="opacity: 0.8; font-weight: normal"
+                  ><strong>Technical University of Košice</strong></span
+                ><br />
+                <em>Graduated with Honors</em>
+              </li>
+              <li>
+                <b>Masters's in Computer Science</b><br />
+                <em>Intelligent Systems</em>
+                <span style="opacity: 0.8; font-weight: normal"
+                  ><strong>Technical University of Košice</strong></span
+                ><br />
+                <em>Graduated with Honors • Dean's honorable mention</em>
+              </li>
+            </ul>
+          </div>
 
-    <script>
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
+          <div class="resume-box">
+            <h3><i class="fas fa-briefcase"></i> Work Experience</h3>
+            <ul>
+              <li>
+                <strong>Independent Developer - Career Break</strong><br />
+                <em>Košice, SK (2024 - 2025)</em>
+              </li>
+              <li>
+                <strong>Programmer</strong> at Amit Transportation<br />
+                <em>Prague, CZ (2024)</em>
+              </li>
+              <li>
+                <strong>Software Engineer</strong> at Siemens<br />
+                <em>Prague, CZ (2023 - 2024)</em>
+              </li>
+              <li>
+                <strong>IT Assistant</strong> at Deutsche Telekom IT
+                Solutions<br />
+                <em>Košice, SK (Part-time, 2021 - 2022)</em>
+              </li>
+              <li>
+                <strong>Work and Travel Program Participant</strong><br />
+                <em>United States (Cultural Exchange, 2019, 2022)</em>
+              </li>
+            </ul>
+          </div>
 
-        menuToggle.addEventListener('click', () => {
-            navLinks.style.transition = 'all 0.5s ease-in-out';
-            navLinks.classList.toggle('active');
-        });
+          <div class="resume-box">
+            <h3><i class="fas fa-code"></i> Skills</h3>
+            <ul class="skills-list">
+              <li>
+                <strong>Languages:</strong> Python, C++, C, SQL, JavaScript
+              </li>
+              <li>
+                <strong>Data & AI:</strong> Pandas, NumPy, Scikit-learn,
+                TensorFlow, Keras, PyTorch, Matplotlib, Seaborn
+              </li>
+              <li><strong>Web Development:</strong> Flask, HTML5, CSS3</li>
+              <li>
+                <strong>Dev Tools & Version Control:</strong> Git, GitHub,
+                Docker
+              </li>
+              <li><strong>Databases:</strong> MySQL, MongoDB, PostgreSQL</li>
+              <li><strong>Cloud & Infrastructure:</strong> AWS, Docker</li>
+              <li><strong>Big Data & ETL:</strong> Apache Spark</li>
+              <li>
+                <strong>Math & Control:</strong> MATLAB, Simulink, Control
+                Theory, System Modeling, Optimization (SciPy)
+              </li>
+            </ul>
+          </div>
 
-        const username = 'mirouhlar';
-        const excludedRepos = ['mirouhlar']; // repository names I want to exclude
-        
-        async function fetchRepositories() {
-            try {
-                const response = await fetch(`https://api.github.com/users/${username}/repos`);
-                const repos = await response.json();
-                const carousel = document.getElementById('repoCarousel');
-        
-                repos
-                    .filter(repo => !excludedRepos.includes(repo.name)) // Filter out excluded repositories
-                    .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at)) // Sort by last updated date
-                    .forEach(repo => {
-                        const card = document.createElement('div');
-                        card.className = 'repo-card';
-        
-                        card.innerHTML = `
-                            <h3>${repo.name}</h3>
-                            <p>Last Updated: ${new Date(repo.updated_at).toLocaleDateString()}</p>
-                            <a href="${repo.html_url}" target="_blank">View on GitHub</a>
-                        `;
-        
-                        card.addEventListener('click', () => {
-                            const description = repo.description || 'No description available.';
-                            document.getElementById('repoDescription').innerHTML = `
-                                <strong>Short description of ${repo.name} repository:</strong><br>${description}
-                            `;
-                        });
-        
-                        carousel.appendChild(card);
-                    });
-            } catch (error) {
-                console.error('Error fetching repositories:', error);
-            }
-        }
-        
-        // Fetching repositories on page load
-        fetchRepositories();
+          <div class="resume-box">
+            <h3><i class="fas fa-book"></i> Research & Publications</h3>
+            <ul>
+              <li>
+                <strong
+                  >Modeling and optimal control of underactuated mechanical
+                  systems</strong
+                ><br />
+                AIP Conf. Proc. 3094, 500036 (2024)<br />
+                <a
+                  href="https://doi.org/10.1063/5.0212921"
+                  target="_blank"
+                  class="resume-link"
+                >
+                  <i class="fas fa-external-link-alt"></i> Read Publication (DOI
+                  10.1063/5.0212921)
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="projects" class="section">
+      <div class="container">
+        <h2>Repositories</h2>
+        <div class="carousel-container">
+          <button class="carousel-btn prev" id="prevBtn">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="carousel-track-container">
+            <ul class="carousel-track" id="github-list">
+              <li class="carousel-slide loading-slide">
+                Initializing Fetch...
+              </li>
+            </ul>
+          </div>
+          <button class="carousel-btn next" id="nextBtn">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
 
+    <section id="certificates" class="section">
+      <div class="container">
+        <h2>Technical Certifications and Courses</h2>
+        <div class="cert-grid" id="cert-grid"></div>
+      </div>
+    </section>
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("visible");
-                    }
-                });
-            }, { threshold: 0.1 }); 
+    <footer>
+      <p>&copy; 2025 Miroslav Uhľar</p>
+    </footer>
 
-            document.querySelectorAll(".animated").forEach(element => observer.observe(element));
-        });
-    </script>
-</body>
-
+    <script src="script.js"></script>
+  </body>
 </html>
