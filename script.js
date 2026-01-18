@@ -142,7 +142,7 @@ function updateCarouselPosition() {
             desc: "Relational database management and SQL analysis.",
             date: "2024",
             link: "#",
-            image: "certificates/statistics.jpg" 
+            image: "certificates/sql.jpg" 
         },
         {
             name: "Python for Data Science",
@@ -158,7 +158,7 @@ function updateCarouselPosition() {
             desc: "Statistical analysis and probability theory for data.",
             date: "2024",
             link: "#",
-            image: "certificates/sql.jpg"
+            image: "certificates/statistics.jpg"
         },
         {
             name: "Unreal Development in C++",
